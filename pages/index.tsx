@@ -116,13 +116,16 @@ const styles = `
     justify-content: space-between;
     padding: 1rem 0;
   }
-
+  
   .logo {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-
+  .logo-image{
+    width: 100%;
+    height: 60px;
+  }
   .logo-icon {
     width: 2rem;
     height: 2rem;
@@ -729,7 +732,8 @@ export default function TupchiyTemplate() {
   const buttonBackground = data.button_background || '#f59e0b' // default amber
   const buttonText = data.button_text || '#1a202c' // default dark
   const textColor = data.text_color || '#f7fafc' // default light
-  const colorHighlightText = data.color_highlight_text || '#f59e0b' // default amber
+  const colorHighlightText = data.color_highlight_text || '#f59e0b' 
+  
 
   // Функція для заміни змінних у content
   const replaceVariables = (content: string): string => {
@@ -757,6 +761,10 @@ export default function TupchiyTemplate() {
   const heroBadge = data.hero_badge || '🎰 Welcome Bonus'
   const ctaText = data.cta_text || 'Play Now'
   const popupText = data.popup_text || '🎁 Welcome Bonus: 100% up to $500 + 200 Free Spins!'
+  // New variable
+  const logoImg = data.logo_url
+  const urlSite = data.url || '/'
+  const year = new Date().getFullYear();
 
   // Генеруємо динамічні стилі з кольорами
   const dynamicStyles = `
@@ -876,10 +884,9 @@ export default function TupchiyTemplate() {
           <div className="container">
             <div className="header-content">
               <div className="logo">
-                <svg className="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-                </svg>
-                <span className="logo-text">{siteName}</span>
+                <a href={urlSite}>
+                  <img src={logoImg} alt={siteName} className="logo-image"/>
+                </a>
               </div>
               <div className="header-buttons">
                 <button className="btn btn-outline">Login</button>
@@ -928,7 +935,6 @@ export default function TupchiyTemplate() {
                   <li><a href="#home" className="nav-link">Home</a></li>
                   <li><a href="#slots" className="nav-link">Slots</a></li>
                   <li><a href="#bonuses" className="nav-link">Bonuses</a></li>
-                  <li><a href="#about" className="nav-link">About</a></li>
                 </>
               )}
             </ul>
@@ -1071,10 +1077,9 @@ export default function TupchiyTemplate() {
             <div className="footer-content">
               <div className="footer-top">
                 <div className="logo">
-                  <svg className="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: '1.5rem', height: '1.5rem' }}>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-                  </svg>
-                  <span className="logo-text" style={{ fontSize: '1.25rem' }}>{siteName}</span>
+                  <a href={urlSite}>
+                    <img src={logoImg} alt={siteName} className="logo-image"/>
+                  </a>
                 </div>
 
                 <div className="footer-certifications">
@@ -1112,7 +1117,8 @@ export default function TupchiyTemplate() {
 
               <div className="footer-bottom">
                 <p className="footer-copyright">
-                  {data.footer_text || `© 2024 ${siteName}. All rights reserved. Gambling can be addictive. Play responsibly.`}
+                  {data.footer_text ||
+                      `© ${year}. All rights reserved. ${siteName} Casino.`}
                 </p>
               </div>
             </div>
@@ -1132,7 +1138,7 @@ export default function TupchiyTemplate() {
               <div className="popup-text">{popupText}</div>
 
               <div className="popup-buttons">
-                <button className="btn btn-primary">Get Bonu</button>
+                <button className="btn btn-primary">Get Bonus</button>
                 <button className="btn-close" onClick={() => setShowPopup(false)}>
                   <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
