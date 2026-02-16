@@ -60,7 +60,46 @@
   "color_highlight_text": "#ffffff",
   "faq_title": "FAQ",
   "logo": null,
-  "Slots": [],
+  "Slots": [
+    {
+      "id": 1,
+      "Name": "SLOT",
+      "link": "/play/",
+      "logo": [
+        {
+          "id": 14,
+          "name": "Gates-of-Olympus_500x560_D-W.jpg",
+          "url": "/uploads/Gates_of_Olympus_500x560_D_W_13d37ae1bd.jpg",
+          "formats": {
+            "small": {
+              "ext": ".jpg",
+              "url": "/uploads/small_Gates_of_Olympus_500x560_D_W_13d37ae1bd.jpg",
+              "hash": "small_Gates_of_Olympus_500x560_D_W_13d37ae1bd",
+              "mime": "image/jpeg",
+              "name": "small_Gates-of-Olympus_500x560_D-W.jpg",
+              "path": null,
+              "size": 56.42,
+              "width": 446,
+              "height": 500,
+              "sizeInBytes": 56422
+            },
+            "thumbnail": {
+              "ext": ".jpg",
+              "url": "/uploads/thumbnail_Gates_of_Olympus_500x560_D_W_13d37ae1bd.jpg",
+              "hash": "thumbnail_Gates_of_Olympus_500x560_D_W_13d37ae1bd",
+              "mime": "image/jpeg",
+              "name": "thumbnail_Gates-of-Olympus_500x560_D-W.jpg",
+              "path": null,
+              "size": 8.68,
+              "width": 139,
+              "height": 156,
+              "sizeInBytes": 8681
+            }
+          }
+        }
+      ]
+    }
+  ],
   "Bonuses": [
     {
       "id": 1,
@@ -174,8 +213,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-02-16T10:08:35.622Z",
+  "_generated_at": "2026-02-16T10:09:44.414Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-02-16T10:08:36.497Z",
-  "_deploy_trigger": "jxzj6s"
+  "_last_deploy": "2026-02-16T10:09:45.096Z",
+  "_deploy_trigger": "0vhrvo"
 }
