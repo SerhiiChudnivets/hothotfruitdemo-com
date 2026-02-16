@@ -47,7 +47,7 @@ interface CasinoData {
   hero_subtitle?: string
   hero_badge?: string
   cta_text?: string
-  logo_url?: string
+  logo?: { url: string; name?: string } | null
   accent_color?: string
   tagline?: string
   features_list?: string
