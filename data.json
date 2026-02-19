@@ -59,7 +59,57 @@
   "text_color": "#f2f2f2",
   "color_highlight_text": "#ffffff",
   "faq_title": "FAQ",
+  "login_text": "ZALUPA",
+  "register_text": "ZHOPA",
+  "slots_title": "Best Slot From Serhii",
+  "bonus_title": "Best Bonus",
+  "get_bonus_btn_text": "1000% + 200FS",
+  "color_main_btn_text": "#ff0000",
   "logo": null,
+  "popup_logo": {
+    "id": 15,
+    "name": "Vos-logo (1).png",
+    "url": "/uploads/Vos_logo_1_8927ecea89.png",
+    "formats": {
+      "small": {
+        "ext": ".png",
+        "url": "/uploads/small_Vos_logo_1_8927ecea89.png",
+        "hash": "small_Vos_logo_1_8927ecea89",
+        "mime": "image/png",
+        "name": "small_Vos-logo (1).png",
+        "path": null,
+        "size": 49.96,
+        "width": 500,
+        "height": 210,
+        "sizeInBytes": 49957
+      },
+      "medium": {
+        "ext": ".png",
+        "url": "/uploads/medium_Vos_logo_1_8927ecea89.png",
+        "hash": "medium_Vos_logo_1_8927ecea89",
+        "mime": "image/png",
+        "name": "medium_Vos-logo (1).png",
+        "path": null,
+        "size": 91,
+        "width": 750,
+        "height": 316,
+        "sizeInBytes": 90997
+      },
+      "thumbnail": {
+        "ext": ".png",
+        "url": "/uploads/thumbnail_Vos_logo_1_8927ecea89.png",
+        "hash": "thumbnail_Vos_logo_1_8927ecea89",
+        "mime": "image/png",
+        "name": "thumbnail_Vos-logo (1).png",
+        "path": null,
+        "size": 18.66,
+        "width": 245,
+        "height": 103,
+        "sizeInBytes": 18663
+      }
+    }
+  },
+  "main_background_img": null,
   "Slots": [
     {
       "id": 1,
@@ -213,8 +263,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-02-16T10:09:44.414Z",
+  "_generated_at": "2026-02-19T16:01:22.630Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-02-16T10:09:45.096Z",
-  "_deploy_trigger": "0vhrvo"
+  "_last_deploy": "2026-02-19T16:01:23.195Z",
+  "_deploy_trigger": "jifwc"
 }

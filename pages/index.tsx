@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
+import {array} from "prop-types";
 
 interface MediaFile {
   id?: number
@@ -30,6 +31,19 @@ interface MenuItem {
   submenu?: SubmenuItem[]
 }
 
+interface Bonus {
+  id?: number
+  Name?: string
+  logo?: MediaFile | MediaFile[] | string
+  link?: string
+}
+
+interface FaqItem {
+  id?: number
+  question: string
+  answer: string
+}
+
 interface CasinoData {
   // Базові поля
   name: string
@@ -53,6 +67,7 @@ interface CasinoData {
   features_list?: string
   footer_text?: string
   popup_text?: string
+  faq_title?:string
   
   // Колірні теми
   main_background?: string
@@ -67,6 +82,7 @@ interface CasinoData {
   
   // Repeatable components
   Slots?: Slot[]
+  Bonuses?: Bonus[]
   header_menu?: MenuItem[]
   footer_menu?: MenuItem[]
   
@@ -459,6 +475,10 @@ const styles = `
     border: 1px solid var(--border);
     transition: all 0.3s;
   }
+  .bonus-card img{
+    width: 70px;
+    height: 80px;
+  }
 
   .bonus-card:hover {
     border-color: var(--primary);
@@ -552,6 +572,83 @@ const styles = `
     font-style: italic;
     color: var(--muted-foreground);
   }
+  .faq-section {
+    padding: 4rem 0;
+    background: var(--background);
+  }
+  .faq-section .content-wrapper{
+    line-height: unset;
+  } 
+  
+  .faq-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+  }
+  
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .faq-item {
+    background: var(--card);
+    border-radius: 1.75rem;
+    padding: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--primary);
+    transition: all 0.3s ease;
+  }
+  
+  .faq-question {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .faq-question:hover {
+    background-color: var(--secondary);
+  }
+  
+  .faq-answer {
+    padding: 0; 
+    color: var(--muted-foreground);
+    line-height: 1.6;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 1000px; 
+  }
+  
+  .faq-answer.open {
+    height: auto;
+    opacity: 1;
+  }
+  
+  .faq-toggle-icon {
+    display: flex;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .faq-toggle-icon svg {
+    transition: transform 0.3s ease;
+  }
+  
+  
+  
+  .faq-toggle-icon.open {
+    transform: rotate(180deg); 
+  }
+
 
   /* Footer */
   footer {
@@ -718,6 +815,12 @@ const styles = `
     .content-wrapper {
       font-size: 1rem;
     }
+    .faq-list, .section-title{
+      width: 100%;
+    }
+    .faq-section .container{
+      flex-direction: column;
+    }
   }
 `;
 export default function TupchiyTemplate() {
@@ -732,16 +835,16 @@ export default function TupchiyTemplate() {
   const buttonBackground = data.button_background || '#f59e0b' // default amber
   const buttonText = data.button_text || '#1a202c' // default dark
   const textColor = data.text_color || '#f7fafc' // default light
-  const colorHighlightText = data.color_highlight_text || '#f59e0b' 
-  
+  const colorHighlightText = data.color_highlight_text || '#f59e0b'
+
 
   // Функція для заміни змінних у content
   const replaceVariables = (content: string): string => {
     if (!content) return content
-    
+
     let result = content
     const variableRegex = /\{\{([^}]+)\}\}/g
-    
+
     result = result.replace(variableRegex, (match, variableName) => {
       const trimmedName = variableName.trim()
       if (data[trimmedName] !== undefined && data[trimmedName] !== null) {
@@ -749,7 +852,7 @@ export default function TupchiyTemplate() {
       }
       return match
     })
-    
+
     return result
   }
 
@@ -765,6 +868,9 @@ export default function TupchiyTemplate() {
   const logoImg = data.logo_url
   const urlSite = data.url || '/'
   const year = new Date().getFullYear();
+  const faqTitle = data.faq_title
+  const faqs = Array.isArray(data.FAQ) ? data.FAQ : []
+
 
   // Генеруємо динамічні стилі з кольорами
   const dynamicStyles = `
@@ -785,24 +891,9 @@ export default function TupchiyTemplate() {
   `;
 
   // Mock slots data if not provided
-  const slots = data.Slots && data.Slots.length > 0 ? data.Slots : [
-    { id: 1, Name: 'Gem Rush', logo: '', link: '#' },
-    { id: 2, Name: "Pharaoh's Gold", logo: '', link: '#' },
-    { id: 3, Name: 'Lucky 777', logo: '', link: '#' },
-    { id: 4, Name: 'Wild West', logo: '', link: '#' },
-    { id: 5, Name: "Dragon's Fire", logo: '', link: '#' },
-    { id: 6, Name: 'Ocean Treasure', logo: '', link: '#' },
-    { id: 7, Name: 'Cosmic Slots', logo: '', link: '#' },
-    { id: 8, Name: 'Viking Fortune', logo: '', link: '#' },
-  ]
+  const slots = data.Slots && data.Slots.length > 0 ? data.Slots : []
 
-  const bonuses = [
-    { id: 1, name: 'LuckySpin', bonus: '200% Welcome Bonus', color: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)' },
-    { id: 2, name: 'GoldenBet', bonus: '100 Free Spins', color: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)' },
-    { id: 3, name: 'RoyalWin', bonus: '500% First Deposit', color: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)' },
-    { id: 4, name: 'JackpotCity', bonus: 'No Wagering Bonus', color: 'linear-gradient(135deg, #ef4444 0%, #f43f5e 100%)' },
-    { id: 5, name: 'SpinPalace', bonus: '50 Free Spins Daily', color: 'linear-gradient(135deg, #10b981 0%, #14b8a6 100%)' },
-  ]
+  const bonuses = data.Bonuses && data.Bonuses.length > 0 ? data.Bonuses : []
 
   useEffect(() => {
     const handleScroll = () => {
@@ -814,6 +905,7 @@ export default function TupchiyTemplate() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
 
   const visibleSlots = 5
   const visibleBonuses = 5
@@ -841,6 +933,13 @@ export default function TupchiyTemplate() {
     if (typeof slot.logo === 'object' && 'url' in slot.logo) return slot.logo.url || ''
     return ''
   }
+  const getMediaUrl = (media?: MediaFile | MediaFile[] | string) => {
+    if (!media) return ''
+    if (typeof media === 'string') return media
+    if (Array.isArray(media) && media.length > 0) return media[0].url || ''
+    if (typeof media === 'object' && 'url' in media) return media.url || ''
+    return ''
+  }
 
   // Parse html_head and inject into document head (client-side only)
   useEffect(() => {
@@ -848,7 +947,7 @@ export default function TupchiyTemplate() {
       // Create a temporary div to parse HTML
       const temp = document.createElement('div');
       temp.innerHTML = data.html_head;
-      
+
       // Move all elements to document.head
       Array.from(temp.children).forEach((child) => {
         const clone = child.cloneNode(true) as HTMLElement;
@@ -856,7 +955,7 @@ export default function TupchiyTemplate() {
         clone.setAttribute('data-injected-from-strapi', 'true');
         document.head.appendChild(clone);
       });
-      
+
       // Cleanup on unmount
       return () => {
         document.querySelectorAll('[data-injected-from-strapi="true"]').forEach((el) => {
@@ -865,6 +964,31 @@ export default function TupchiyTemplate() {
       };
     }
   }, [data.html_head]);
+
+  useEffect(() => {
+    if (data.faq_schema && typeof document !== 'undefined') {
+      const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(({ question, answer }) => ({
+          "@type": "Question",
+          "name": question,
+          "acceptedAnswer": { "@type": "Answer", "text": answer }
+        }))
+      };
+
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(faqSchema);
+      document.head.appendChild(script);
+
+
+      return () => {
+        document.head.removeChild(script);
+      };
+    }
+  }, [faqs, data.faq_schema]);
+
 
   return (
     <>
@@ -903,8 +1027,8 @@ export default function TupchiyTemplate() {
               {data.header_menu && data.header_menu.length > 0 ? (
                 data.header_menu.map((item, index) => (
                   <li key={item.id || index} className="menu-item">
-                    <a 
-                      href={item.url} 
+                    <a
+                      href={item.url}
                       className="nav-link"
                       target={item.open_in_new_tab ? '_blank' : '_self'}
                       rel={item.open_in_new_tab ? 'noopener noreferrer' : undefined}
@@ -1031,22 +1155,39 @@ export default function TupchiyTemplate() {
               </button>
 
               <div className="bonuses-grid">
-                {bonuses.slice(bonusStartIndex, bonusStartIndex + visibleBonuses).map((bonus) => (
-                  <div key={bonus.id} className="bonus-card">
-                    <div className="bonus-header" style={{ background: bonus.color }}>
-                      <svg className="bonus-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
-                      </svg>
-                    </div>
-                    <div className="bonus-content">
-                      <h3 className="bonus-name">{bonus.name}</h3>
-                      <p className="bonus-text">{bonus.bonus}</p>
-                      <button className="btn btn-primary" style={{ width: '100%', padding: '0.5rem' }}>
-                        Get Bonus
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                {bonuses.slice(bonusStartIndex, bonusStartIndex + visibleBonuses).map((bonus, index) => {
+                  const bonusLogo = getMediaUrl(bonus.logo)
+
+                  return (
+                      <div key={bonus.id || index} className="bonus-card">
+                        <div className="bonus-header" style={{ background: data.button_background }}>
+                          {bonusLogo ? (
+                              <img
+                                  src={bonusLogo}
+                                  alt={bonus.Name || `Bonus ${index + 1}`}
+
+                              />
+                          ) : (
+                              <svg className="bonus-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                              </svg>
+                          )}
+                        </div>
+
+                        <div className="bonus-content">
+                          <h3 className="bonus-name">{bonus.Name || `Bonus ${index + 1}`}</h3>
+
+                          <button
+                              className="btn btn-primary"
+                              style={{ width: '100%', padding: '0.5rem' }}
+                              onClick={() => bonus.link && (window.location.href = bonus.link)}
+                          >
+                            Get Bonus
+                          </button>
+                        </div>
+                      </div>
+                  )
+                })}
               </div>
 
               <button
@@ -1071,6 +1212,67 @@ export default function TupchiyTemplate() {
           </section>
         )}
 
+        {/* FAQ */}
+        {faqs.length > 0 && (
+            <section id="faq" className="faq-section">
+              <div className="container">
+                <div className="content-wrapper">
+                  <h2 className="faq-title">{faqTitle}</h2>
+                  <div className="faq-list">
+                    {faqs.map((item, index) => {
+                      const [isOpen, setIsOpen] = useState(false);
+                      const toggleAnswer = () => {
+                        setIsOpen(!isOpen);
+                      };
+
+                      return (
+                          <div key={item.id || index} className="faq-item">
+                            <div className="faq-question" onClick={toggleAnswer}>
+                              {item.question}
+                              <span className={`faq-toggle-icon ${isOpen ? 'open' : ''}`}>
+                    {isOpen ? (
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200"
+                        >
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    ) : (
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200"
+                        >
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    )}
+                  </span>
+                            </div>
+                            <div className={`faq-answer ${isOpen ? 'open' : ''}`}>{item.answer}</div>
+                          </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </section>
+        )}
+
         {/* Footer */}
         <footer>
           <div className="container">
@@ -1093,24 +1295,18 @@ export default function TupchiyTemplate() {
                 </div>
 
                 <div className="footer-links">
-                  {data.footer_menu && data.footer_menu.length > 0 ? (
-                    data.footer_menu.map((item, index) => (
-                      <a
-                        key={item.id || index}
-                        href={item.url}
-                        className="footer-link"
-                        target={item.open_in_new_tab ? '_blank' : '_self'}
-                        rel={item.open_in_new_tab ? 'noopener noreferrer' : undefined}
-                      >
-                        {item.label}
-                      </a>
-                    ))
-                  ) : (
-                    <>
-                      <a href="#" className="footer-link">About Us</a>
-                      <a href="#" className="footer-link">Terms & Conditions</a>
-                      <a href="#" className="footer-link">Responsible Gambling</a>
-                    </>
+                  {data.footer_menu && data.footer_menu.length > 0 && (
+                      data.footer_menu.map((item, index) => (
+                          <a
+                              key={item.id || index}
+                              href={item.url}
+                              className="footer-link"
+                              target={item.open_in_new_tab ? '_blank' : '_self'}
+                              rel={item.open_in_new_tab ? 'noopener noreferrer' : undefined}
+                          >
+                            {item.label}
+                          </a>
+                      ))
                   )}
                 </div>
               </div>
