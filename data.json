@@ -109,7 +109,61 @@
       }
     }
   },
-  "main_background_img": null,
+  "main_background_img": {
+    "id": 8,
+    "name": "beautiful-picture",
+    "url": "/uploads/beautiful_picture_0f014f0be0.jpeg",
+    "formats": {
+      "large": {
+        "ext": ".jpeg",
+        "url": "/uploads/large_beautiful_picture_0f014f0be0.jpeg",
+        "hash": "large_beautiful_picture_0f014f0be0",
+        "mime": "image/jpeg",
+        "name": "large_beautiful-picture",
+        "path": null,
+        "size": 83.36,
+        "width": 1000,
+        "height": 666,
+        "sizeInBytes": 83355
+      },
+      "small": {
+        "ext": ".jpeg",
+        "url": "/uploads/small_beautiful_picture_0f014f0be0.jpeg",
+        "hash": "small_beautiful_picture_0f014f0be0",
+        "mime": "image/jpeg",
+        "name": "small_beautiful-picture",
+        "path": null,
+        "size": 23.35,
+        "width": 500,
+        "height": 333,
+        "sizeInBytes": 23351
+      },
+      "medium": {
+        "ext": ".jpeg",
+        "url": "/uploads/medium_beautiful_picture_0f014f0be0.jpeg",
+        "hash": "medium_beautiful_picture_0f014f0be0",
+        "mime": "image/jpeg",
+        "name": "medium_beautiful-picture",
+        "path": null,
+        "size": 47.81,
+        "width": 750,
+        "height": 500,
+        "sizeInBytes": 47812
+      },
+      "thumbnail": {
+        "ext": ".jpeg",
+        "url": "/uploads/thumbnail_beautiful_picture_0f014f0be0.jpeg",
+        "hash": "thumbnail_beautiful_picture_0f014f0be0",
+        "mime": "image/jpeg",
+        "name": "thumbnail_beautiful-picture",
+        "path": null,
+        "size": 6.44,
+        "width": 234,
+        "height": 156,
+        "sizeInBytes": 6436
+      }
+    }
+  },
   "Slots": [
     {
       "id": 1,
@@ -263,8 +317,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-02-19T16:01:22.630Z",
+  "_generated_at": "2026-02-19T16:02:37.069Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-02-19T16:01:23.195Z",
-  "_deploy_trigger": "jifwc"
+  "_last_deploy": "2026-02-19T16:02:37.835Z",
+  "_deploy_trigger": "d2nby4"
 }
