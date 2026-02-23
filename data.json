@@ -54,7 +54,7 @@
   "redirect_site": null,
   "main_background": "#200051",
   "secondary_background": "#710068",
-  "button_background": "#111111",
+  "button_background": "#ffffff",
   "button_text": "#ffcc00",
   "text_color": "#f2f2f2",
   "color_highlight_text": "#ffffff",
@@ -383,8 +383,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-02-23T12:03:57.460Z",
+  "_generated_at": "2026-02-23T12:07:30.086Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-02-23T12:03:57.958Z",
-  "_deploy_trigger": "o9942"
+  "_last_deploy": "2026-02-23T12:07:30.575Z",
+  "_deploy_trigger": "t9j838"
 }
