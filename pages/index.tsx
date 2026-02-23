@@ -68,6 +68,11 @@ interface CasinoData {
   footer_text?: string
   popup_text?: string
   faq_title?:string
+  login_text?: string
+  register_text?: string
+  slots_title?: string
+  bonus_title?: string
+  get_bonus_btn_text?: string
   
   // Колірні теми
   main_background?: string
@@ -76,6 +81,7 @@ interface CasinoData {
   button_text?: string
   text_color?: string
   color_highlight_text?: string
+  color_main_btn_text?: string
   
   // Rich text content
   content?: string
@@ -162,7 +168,7 @@ const styles = `
   .btn {
     padding: 0.5rem 1.5rem;
     font-weight: 600;
-    border-radius: calc(var(--radius) * 2);
+    border-radius: calc(var(--radius) * 1);
     cursor: pointer;
     transition: all 0.3s;
     border: none;
@@ -171,7 +177,7 @@ const styles = `
 
   .btn-outline {
     background: transparent;
-    border: 2px solid var(--primary);
+    border: 1px solid var(--primary);
     color: var(--primary);
   }
 
@@ -289,8 +295,11 @@ const styles = `
   .hero-section {
     position: relative;
     width: 100%;
-    height: 600px;
+    height: auto;
     overflow: hidden;
+    padding: 5rem;
+    background-size: cover;
+    background-position: center center; 
   }
 
   .hero-bg {
@@ -299,16 +308,22 @@ const styles = `
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--background) 100%);
   }
 
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, 
-      hsla(var(--background), 0.9) 0%, 
-      hsla(var(--background), 0.6) 50%, 
-      transparent 100%);
+    
+  }
+  
+  .header__gradient { 
+    position: absolute;
+    background: linear-gradient(180deg, rgba(25, 25, 25, 0.00) 0%, #191919 100%); 
+    height: 30px;
+    width: 100%;
+    bottom: -1px; 
+    left: 0;
+    z-index: 1; 
   }
 
   .hero-content {
@@ -357,6 +372,11 @@ const styles = `
 
   .btn-hero {
     box-shadow: 0 0 30px hsla(var(--button-bg), 0.4);
+  }
+  
+  .color-main-btn{
+     color: var(--color-main-btn);
+     box-shadow: 0 0 10px var(--primary);
   }
 
   /* Slots Section */
@@ -535,6 +555,7 @@ const styles = `
     color: var(--button-bg);
     margin: 2rem 0 1rem;
     font-weight: 700;
+    text-align: center;
   }
 
   .content-wrapper h1 { font-size: 2.5rem; }
@@ -544,6 +565,9 @@ const styles = `
   .content-wrapper p {
     margin-bottom: 1.5rem;
     color: var(--muted-foreground);
+    line-height: 1.75rem;
+    font-size: 1.125rem;
+    font-weight: 200;
   }
 
   .content-wrapper a {
@@ -654,7 +678,7 @@ const styles = `
   footer {
     background: var(--card);
     border-top: 1px solid var(--border);
-    padding: 2rem 0;
+    padding: 2rem 0 7rem 0;
   }
 
   .footer-content {
@@ -736,7 +760,7 @@ const styles = `
     z-index: 50;
     background: var(--card);
     border-top: 1px solid hsla(var(--primary), 0.3);
-    box-shadow: 0 -4px 20px hsla(var(--primary), 0.2);
+    box-shadow: 0 -2px 15px var(--primary);
     animation: slideUp 0.3s ease-out;
   }
 
@@ -795,7 +819,7 @@ const styles = `
     }
 
     .hero-section {
-      height: 500px;
+      padding:2rem;
     }
 
     .slots-grid,
@@ -836,6 +860,7 @@ export default function TupchiyTemplate() {
   const buttonText = data.button_text || '#1a202c' // default dark
   const textColor = data.text_color || '#f7fafc' // default light
   const colorHighlightText = data.color_highlight_text || '#f59e0b'
+  const colorMainBtnText = data.color_main_btn_text || 'fff'
 
 
   // Функція для заміни змінних у content
@@ -870,6 +895,13 @@ export default function TupchiyTemplate() {
   const year = new Date().getFullYear();
   const faqTitle = data.faq_title
   const faqs = Array.isArray(data.FAQ) ? data.FAQ : []
+  const loginText = data.login_text
+  const registerText = data.register_text
+  const slotsTitle = data.slots_title
+  const bonusTitle = data.bonus_title
+  const getBonusBtn = data.get_bonus_btn_text || 'Get Bonus'
+  const popupLogo = data.popup_logo
+  const backgroundImage = data.main_background_img || '';
 
 
   // Генеруємо динамічні стилі з кольорами
@@ -887,6 +919,7 @@ export default function TupchiyTemplate() {
       --radius: 0.5rem;
       --button-bg: ${buttonBackground};
       --button-text: ${buttonText};
+      --color-main-btn: ${colorMainBtnText};
     }
   `;
 
@@ -1013,8 +1046,13 @@ export default function TupchiyTemplate() {
                 </a>
               </div>
               <div className="header-buttons">
-                <button className="btn btn-outline">Login</button>
-                <button className="btn btn-primary">Register</button>
+                {loginText && (
+                    <button className="btn btn-outline">{loginText}</button>
+                )}
+
+                {registerText && (
+                    <button className="btn btn-primary">{registerText}</button>
+                )}
               </div>
             </div>
           </div>
@@ -1066,7 +1104,16 @@ export default function TupchiyTemplate() {
         </nav>
 
         {/* Hero Banner */}
-        <section id="home" className="hero-section">
+        <section
+            id="home"
+            className="hero-section"
+            style={{
+              backgroundImage: backgroundImage
+                  ? `url(${backgroundImage})`
+                  : `linear-gradient(135deg, var(--secondary) 0%, var(--background) 100%)`,
+            }}
+        >
+          <div className="header__gradient"></div>
           <div className="hero-bg"></div>
           <div className="hero-overlay"></div>
           <div className="container">
@@ -1079,7 +1126,7 @@ export default function TupchiyTemplate() {
               <p className="hero-description">
                 {data.tagline || 'Start your winning journey today with the best welcome offer in online gaming!'}
               </p>
-              <button className="btn btn-primary btn-lg btn-hero">{ctaText}</button>
+              <button className="btn btn-primary btn-lg btn-hero color-main-btn">{ctaText}</button>
             </div>
           </div>
         </section>
@@ -1087,9 +1134,11 @@ export default function TupchiyTemplate() {
         {/* Slots Section */}
         <section id="slots" className="slots-section">
           <div className="container">
+            {slotsTitle && (
             <h2 className="section-title">
-              🎰 Popular <span className="hero-accent">Slots</span>
+              {slotsTitle}
             </h2>
+            )}
             <div className="slider-container">
               <button
                 onClick={handleSlotPrev}
@@ -1140,9 +1189,11 @@ export default function TupchiyTemplate() {
         {/* Bonuses Section */}
         <section id="bonuses" className="bonuses-section">
           <div className="container">
+            {bonusTitle && (
             <h2 className="section-title">
-              🎁 Casino <span className="hero-accent">Bonuses</span>
+              {bonusTitle}
             </h2>
+            )}
             <div className="slider-container">
               <button
                 onClick={handleBonusPrev}
@@ -1182,7 +1233,7 @@ export default function TupchiyTemplate() {
                               style={{ width: '100%', padding: '0.5rem' }}
                               onClick={() => bonus.link && (window.location.href = bonus.link)}
                           >
-                            Get Bonus
+                            {getBonusBtn}
                           </button>
                         </div>
                       </div>
@@ -1325,16 +1376,16 @@ export default function TupchiyTemplate() {
         <div className={`bonus-popup ${showPopup ? '' : 'hidden'}`}>
           <div className="container">
             <div className="popup-content">
+              {popupLogo && (
               <div className="logo">
-                <svg className="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-                </svg>
+                    <img src={popupLogo} alt="Logo" className="logo-image" />
               </div>
+              )}
 
               <div className="popup-text">{popupText}</div>
 
               <div className="popup-buttons">
-                <button className="btn btn-primary">Get Bonus</button>
+                <button className="btn btn-primary color-main-btn">{getBonusBtn}</button>
                 <button className="btn-close" onClick={() => setShowPopup(false)}>
                   <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

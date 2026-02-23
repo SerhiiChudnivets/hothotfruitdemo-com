@@ -65,47 +65,113 @@
   "bonus_title": "Best Bonus",
   "get_bonus_btn_text": "1000% + 200FS",
   "color_main_btn_text": "#ff0000",
-  "logo": null,
-  "popup_logo": {
-    "id": 15,
-    "name": "Vos-logo (1).png",
-    "url": "/uploads/Vos_logo_1_8927ecea89.png",
+  "logo": {
+    "id": 13,
+    "name": "HotHotFruit-Slot-Logo.png",
+    "url": "/uploads/Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
     "formats": {
+      "large": {
+        "ext": ".png",
+        "url": "/uploads/large_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
+        "hash": "large_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
+        "mime": "image/png",
+        "name": "large_HotHotFruit-Slot-Logo.png",
+        "path": null,
+        "size": 387.63,
+        "width": 1000,
+        "height": 453,
+        "sizeInBytes": 387626
+      },
       "small": {
         "ext": ".png",
-        "url": "/uploads/small_Vos_logo_1_8927ecea89.png",
-        "hash": "small_Vos_logo_1_8927ecea89",
+        "url": "/uploads/small_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
+        "hash": "small_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
         "mime": "image/png",
-        "name": "small_Vos-logo (1).png",
+        "name": "small_HotHotFruit-Slot-Logo.png",
         "path": null,
-        "size": 49.96,
+        "size": 124.94,
         "width": 500,
-        "height": 210,
-        "sizeInBytes": 49957
+        "height": 227,
+        "sizeInBytes": 124941
       },
       "medium": {
         "ext": ".png",
-        "url": "/uploads/medium_Vos_logo_1_8927ecea89.png",
-        "hash": "medium_Vos_logo_1_8927ecea89",
+        "url": "/uploads/medium_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
+        "hash": "medium_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
         "mime": "image/png",
-        "name": "medium_Vos-logo (1).png",
+        "name": "medium_HotHotFruit-Slot-Logo.png",
         "path": null,
-        "size": 91,
+        "size": 255.36,
         "width": 750,
-        "height": 316,
-        "sizeInBytes": 90997
+        "height": 340,
+        "sizeInBytes": 255355
       },
       "thumbnail": {
         "ext": ".png",
-        "url": "/uploads/thumbnail_Vos_logo_1_8927ecea89.png",
-        "hash": "thumbnail_Vos_logo_1_8927ecea89",
+        "url": "/uploads/thumbnail_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
+        "hash": "thumbnail_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
         "mime": "image/png",
-        "name": "thumbnail_Vos-logo (1).png",
+        "name": "thumbnail_HotHotFruit-Slot-Logo.png",
         "path": null,
-        "size": 18.66,
+        "size": 34.69,
         "width": 245,
-        "height": 103,
-        "sizeInBytes": 18663
+        "height": 111,
+        "sizeInBytes": 34694
+      }
+    }
+  },
+  "popup_logo": {
+    "id": 13,
+    "name": "HotHotFruit-Slot-Logo.png",
+    "url": "/uploads/Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
+    "formats": {
+      "large": {
+        "ext": ".png",
+        "url": "/uploads/large_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
+        "hash": "large_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
+        "mime": "image/png",
+        "name": "large_HotHotFruit-Slot-Logo.png",
+        "path": null,
+        "size": 387.63,
+        "width": 1000,
+        "height": 453,
+        "sizeInBytes": 387626
+      },
+      "small": {
+        "ext": ".png",
+        "url": "/uploads/small_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
+        "hash": "small_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
+        "mime": "image/png",
+        "name": "small_HotHotFruit-Slot-Logo.png",
+        "path": null,
+        "size": 124.94,
+        "width": 500,
+        "height": 227,
+        "sizeInBytes": 124941
+      },
+      "medium": {
+        "ext": ".png",
+        "url": "/uploads/medium_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
+        "hash": "medium_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
+        "mime": "image/png",
+        "name": "medium_HotHotFruit-Slot-Logo.png",
+        "path": null,
+        "size": 255.36,
+        "width": 750,
+        "height": 340,
+        "sizeInBytes": 255355
+      },
+      "thumbnail": {
+        "ext": ".png",
+        "url": "/uploads/thumbnail_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
+        "hash": "thumbnail_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
+        "mime": "image/png",
+        "name": "thumbnail_HotHotFruit-Slot-Logo.png",
+        "path": null,
+        "size": 34.69,
+        "width": 245,
+        "height": 111,
+        "sizeInBytes": 34694
       }
     }
   },
@@ -296,8 +362,8 @@
       "description": null,
       "priority": 0,
       "createdAt": "2026-01-29T10:20:04.107Z",
-      "updatedAt": "2026-01-29T10:20:04.107Z",
-      "publishedAt": "2026-01-29T10:20:04.102Z",
+      "updatedAt": "2026-02-19T16:11:36.373Z",
+      "publishedAt": "2026-02-19T16:11:36.333Z",
       "locale": null
     }
   ],
@@ -317,8 +383,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-02-19T16:02:37.069Z",
+  "_generated_at": "2026-02-23T12:03:57.460Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-02-19T16:02:37.835Z",
-  "_deploy_trigger": "d2nby4"
+  "_last_deploy": "2026-02-23T12:03:57.958Z",
+  "_deploy_trigger": "o9942"
 }
