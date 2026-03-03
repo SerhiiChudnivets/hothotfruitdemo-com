@@ -401,59 +401,10 @@
       "link": null,
       "logo": [
         {
-          "id": 13,
-          "name": "HotHotFruit-Slot-Logo.png",
-          "url": "/uploads/Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
-          "formats": {
-            "large": {
-              "ext": ".png",
-              "url": "/uploads/large_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
-              "hash": "large_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
-              "mime": "image/png",
-              "name": "large_HotHotFruit-Slot-Logo.png",
-              "path": null,
-              "size": 387.63,
-              "width": 1000,
-              "height": 453,
-              "sizeInBytes": 387626
-            },
-            "small": {
-              "ext": ".png",
-              "url": "/uploads/small_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
-              "hash": "small_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
-              "mime": "image/png",
-              "name": "small_HotHotFruit-Slot-Logo.png",
-              "path": null,
-              "size": 124.94,
-              "width": 500,
-              "height": 227,
-              "sizeInBytes": 124941
-            },
-            "medium": {
-              "ext": ".png",
-              "url": "/uploads/medium_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
-              "hash": "medium_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
-              "mime": "image/png",
-              "name": "medium_HotHotFruit-Slot-Logo.png",
-              "path": null,
-              "size": 255.36,
-              "width": 750,
-              "height": 340,
-              "sizeInBytes": 255355
-            },
-            "thumbnail": {
-              "ext": ".png",
-              "url": "/uploads/thumbnail_Hot_Hot_Fruit_Slot_Logo_b4a33ee710.png",
-              "hash": "thumbnail_Hot_Hot_Fruit_Slot_Logo_b4a33ee710",
-              "mime": "image/png",
-              "name": "thumbnail_HotHotFruit-Slot-Logo.png",
-              "path": null,
-              "size": 34.69,
-              "width": 245,
-              "height": 111,
-              "sizeInBytes": 34694
-            }
-          }
+          "id": 16,
+          "name": "Slotmonster-logo-1.png",
+          "url": "/uploads/Slotmonster_logo_1_d036acf366.png",
+          "formats": null
         }
       ]
     }
@@ -507,8 +458,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-03-03T14:20:54.401Z",
+  "_generated_at": "2026-03-03T14:33:35.624Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-03-03T14:20:54.897Z",
-  "_deploy_trigger": "k61d6"
+  "_last_deploy": "2026-03-03T14:33:36.054Z",
+  "_deploy_trigger": "ceb6mt"
 }
