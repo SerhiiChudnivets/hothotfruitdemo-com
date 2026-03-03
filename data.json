@@ -54,17 +54,17 @@
   "redirect_site": null,
   "main_background": "#200051",
   "secondary_background": "#710068",
-  "button_background": "#b7ff00",
+  "button_background": "#ff0000",
   "button_text": "#ffcc00",
   "text_color": "#f2f2f2",
-  "color_highlight_text": "#ffff2c",
+  "color_highlight_text": "#ffb652",
   "faq_title": "FAQ",
   "login_text": "ZALUPA",
   "register_text": "ZHOPA",
   "slots_title": "Best Slot From Serhii",
   "bonus_title": "Best Bonus",
   "get_bonus_btn_text": "1000% + 200FS",
-  "color_main_btn_text": "#ff0000",
+  "color_main_btn_text": "#ffffff",
   "logo": {
     "id": 13,
     "name": "HotHotFruit-Slot-Logo.png",
@@ -383,8 +383,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-03-03T13:54:06.441Z",
+  "_generated_at": "2026-03-03T13:58:39.533Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-03-03T13:54:06.885Z",
-  "_deploy_trigger": "ul175a"
+  "_last_deploy": "2026-03-03T13:58:40.077Z",
+  "_deploy_trigger": "byrglm"
 }
