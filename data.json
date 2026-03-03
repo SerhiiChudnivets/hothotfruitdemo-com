@@ -54,10 +54,10 @@
   "redirect_site": null,
   "main_background": "#200051",
   "secondary_background": "#710068",
-  "button_background": "#ffffff",
+  "button_background": "#b7ff00",
   "button_text": "#ffcc00",
   "text_color": "#f2f2f2",
-  "color_highlight_text": "#ffffff",
+  "color_highlight_text": "#ffff2c",
   "faq_title": "FAQ",
   "login_text": "ZALUPA",
   "register_text": "ZHOPA",
@@ -383,8 +383,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-03-03T13:40:45.563Z",
+  "_generated_at": "2026-03-03T13:54:06.441Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-03-03T13:40:46.035Z",
-  "_deploy_trigger": "cqogi"
+  "_last_deploy": "2026-03-03T13:54:06.885Z",
+  "_deploy_trigger": "ul175a"
 }
