@@ -890,7 +890,11 @@ export default function TupchiyTemplate() {
   const ctaText = data.cta_text || 'Play Now'
   const popupText = data.popup_text || '🎁 Welcome Bonus: 100% up to $500 + 200 Free Spins!'
   // New variable
-  const logoImg = data.logo_url
+  const normalizeUrl = (url?: string) => {
+    if (!url) return '#'
+    if (/^https?:\/\//i.test(url)) return url
+    return `https://${url}`
+  }
   const urlSite = data.url || '/'
   const year = new Date().getFullYear();
   const faqTitle = data.faq_title
@@ -900,7 +904,6 @@ export default function TupchiyTemplate() {
   const slotsTitle = data.slots_title
   const bonusTitle = data.bonus_title
   const getBonusBtn = data.get_bonus_btn_text || 'Get Bonus'
-  const popupLogo = data.popup_logo
   const backgroundImage = data.main_background_img || '';
 
 
@@ -1041,8 +1044,8 @@ export default function TupchiyTemplate() {
           <div className="container">
             <div className="header-content">
               <div className="logo">
-                <a href={urlSite}>
-                  <img src={logoImg} alt={siteName} className="logo-image"/>
+                <a href={normalizeUrl(urlSite)}>
+                  <img src={getMediaUrl(data.logo)} alt={siteName} className="logo-image"/>
                 </a>
               </div>
               <div className="header-buttons">
@@ -1330,8 +1333,8 @@ export default function TupchiyTemplate() {
             <div className="footer-content">
               <div className="footer-top">
                 <div className="logo">
-                  <a href={urlSite}>
-                    <img src={logoImg} alt={siteName} className="logo-image"/>
+                  <a href={normalizeUrl(urlSite)}>
+                    <img src={getMediaUrl(data.logo)} alt={siteName} className="logo-image"/>
                   </a>
                 </div>
 
@@ -1376,12 +1379,15 @@ export default function TupchiyTemplate() {
         <div className={`bonus-popup ${showPopup ? '' : 'hidden'}`}>
           <div className="container">
             <div className="popup-content">
-              {popupLogo && (
-              <div className="logo">
-                    <img src={popupLogo} alt="Logo" className="logo-image" />
-              </div>
+              {getMediaUrl(data.popup_logo) && (
+                  <div className="logo">
+                    <img
+                        src={getMediaUrl(data.popup_logo)}
+                        alt="Logo"
+                        className="logo-image"
+                    />
+                  </div>
               )}
-
               <div className="popup-text">{popupText}</div>
 
               <div className="popup-buttons">
