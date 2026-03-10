@@ -325,6 +325,13 @@ const styles = `
     left: 0;
     z-index: 1; 
   }
+  
+  .hero-background{
+    background: #00000070;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom:1rem;
+  }
 
   .hero-content {
     position: relative;
@@ -334,11 +341,12 @@ const styles = `
     justify-content: center;
     max-width: 40rem;
   }
+ 
 
   .hero-badge {
     display: inline-block;
-    background: hsla(var(--primary), 0.2);
-    color: var(--button-bg);
+    background: color-mix(in srgb, var(--primary) 40%, transparent);
+    color: var(--muted-foreground);
     padding: 0.25rem 1rem;
     border-radius: 9999px;
     font-size: 0.875rem;
@@ -350,13 +358,13 @@ const styles = `
   .hero-title {
     font-size: 3.5rem;
     font-weight: 700;
-    color: var(--foreground);
+    color: var(--primary);
     margin-bottom: 1rem;
     line-height: 1.1;
   }
 
   .hero-accent {
-    color: var(--button-bg);
+   
   }
 
   .hero-subtitle {
@@ -384,6 +392,17 @@ const styles = `
     padding: 4rem 0;
     background: var(--background);
   }
+  
+ .slot-background {
+    background: #00000070;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 1rem;
+}
 
   .section-title {
     text-align: center;
@@ -489,15 +508,16 @@ const styles = `
   }
 
   .bonus-card {
-    background: var(--card);
+    
     border-radius: 0.75rem;
     overflow: hidden;
     border: 1px solid var(--border);
     transition: all 0.3s;
   }
   .bonus-card img{
-    width: 70px;
-    height: 80px;
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: cover;
   }
 
   .bonus-card:hover {
@@ -510,6 +530,7 @@ const styles = `
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #00000070;
   }
 
   .bonus-icon {
@@ -521,6 +542,7 @@ const styles = `
   .bonus-content {
     padding: 1rem;
     text-align: center;
+    background: var(--background);
   }
 
   .bonus-name {
@@ -552,7 +574,7 @@ const styles = `
   }
 
   .content-wrapper h1, .content-wrapper h2, .content-wrapper h3, .content-wrapper h4 {
-    color: var(--button-bg);
+    color: var(--primary);
     margin: 2rem 0 1rem;
     font-weight: 700;
     text-align: center;
@@ -904,7 +926,7 @@ export default function TupchiyTemplate() {
   const slotsTitle = data.slots_title
   const bonusTitle = data.bonus_title
   const getBonusBtn = data.get_bonus_btn_text || 'Get Bonus'
-  const backgroundImage = data.main_background_img || '';
+
 
 
   // Генеруємо динамічні стилі з кольорами
@@ -976,6 +998,8 @@ export default function TupchiyTemplate() {
     if (typeof media === 'object' && 'url' in media) return media.url || ''
     return ''
   }
+
+    const backgroundImage = getMediaUrl(data.main_background_img);
 
   // Parse html_head and inject into document head (client-side only)
   useEffect(() => {
@@ -1122,13 +1146,15 @@ export default function TupchiyTemplate() {
           <div className="container">
             <div className="hero-content">
               <span className="hero-badge">{heroBadge}</span>
-              <h1 className="hero-title">
-                <span className="hero-accent">{heroTitle}</span>
-              </h1>
-              <p className="hero-subtitle">{heroSubtitle}</p>
-              <p className="hero-description">
-                {data.tagline || 'Start your winning journey today with the best welcome offer in online gaming!'}
-              </p>
+              <div className="hero-background">
+                <h1 className="hero-title">
+                  <span className="hero-accent">{heroTitle}</span>
+                </h1>
+                <p className="hero-subtitle">{heroSubtitle}</p>
+                <p className="hero-description">
+                  {data.tagline || 'Start your winning journey today with the best welcome offer in online gaming!'}
+                </p>
+              </div>
               <button className="btn btn-primary btn-lg btn-hero color-main-btn">{ctaText}</button>
             </div>
           </div>
@@ -1166,10 +1192,12 @@ export default function TupchiyTemplate() {
                         </div>
                       )}
                       <div className="slot-overlay">
-                        <span className="slot-name">{slot.Name || `Slot ${index + 1}`}</span>
-                        <button className="btn btn-primary" onClick={() => slot.link && window.open(slot.link, '_blank')}>
-                          Play
-                        </button>
+                        <div className="slot-background">
+                          <span className="slot-name">{slot.Name || `Slot ${index + 1}`}</span>
+                          <button className="btn btn-primary" onClick={() => slot.link && window.open(slot.link, '_blank')}>
+                            Play
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )
@@ -1214,7 +1242,7 @@ export default function TupchiyTemplate() {
 
                   return (
                       <div key={bonus.id || index} className="bonus-card">
-                        <div className="bonus-header" style={{ background: data.button_background }}>
+                        <div className="bonus-header">
                           {bonusLogo ? (
                               <img
                                   src={bonusLogo}
