@@ -65,6 +65,7 @@
   "bonus_title": "Best Bonuses ",
   "get_bonus_btn_text": "Get Bonus",
   "color_main_btn_text": "#ffffff",
+  "redirect_link": "/play/",
   "logo": {
     "id": 13,
     "name": "HotHotFruit-Slot-Logo.png",
@@ -487,8 +488,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-03-10T15:00:37.763Z",
+  "_generated_at": "2026-03-13T14:13:00.696Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-03-10T15:00:38.352Z",
-  "_deploy_trigger": "nkjbeh"
+  "_last_deploy": "2026-03-13T14:13:01.235Z",
+  "_deploy_trigger": "1rixas"
 }

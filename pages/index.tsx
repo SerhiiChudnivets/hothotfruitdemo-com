@@ -108,6 +108,11 @@ const styles = `
     padding: 0;
     box-sizing: border-box;
   }
+  
+  html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
 
   body {
     font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -848,10 +853,27 @@ const styles = `
     .bonuses-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-
-    .popup-text {
-      font-size: 0.875rem;
+    .popup-content{
+      padding: 1rem 0;
     }
+    .popup-content .logo-image{
+      height: 45px;
+    }
+    .popup-text {
+      font-size: 0.775rem;
+    }
+    .popup-content .btn{
+      font-size: 0.75rem;
+    } 
+    
+      table {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: block;
+  }
+  td {
+    width: 1%;
+  }
 
     .header-buttons .btn {
       padding: 0.375rem 1rem;
