@@ -73,6 +73,7 @@ interface CasinoData {
   slots_title?: string
   bonus_title?: string
   get_bonus_btn_text?: string
+  redirect_link?: string
   
   // Колірні теми
   main_background?: string
@@ -948,6 +949,7 @@ export default function TupchiyTemplate() {
   const slotsTitle = data.slots_title
   const bonusTitle = data.bonus_title
   const getBonusBtn = data.get_bonus_btn_text || 'Get Bonus'
+  const redirectLink = data.redirect_link || ''
 
 
 
@@ -1096,11 +1098,27 @@ export default function TupchiyTemplate() {
               </div>
               <div className="header-buttons">
                 {loginText && (
-                    <button className="btn btn-outline">{loginText}</button>
+                    <button
+                        className="btn btn-outline"
+                        onClick={() => {
+                          const link = redirectLink ? redirectLink : '/';
+                          window.open(link, '_blank');
+                        }}
+                    >
+                      {loginText}
+                    </button>
                 )}
 
                 {registerText && (
-                    <button className="btn btn-primary">{registerText}</button>
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => {
+                          const link = redirectLink ? redirectLink : '/';
+                          window.open(link, '_blank');
+                        }}
+                    >
+                      {registerText}
+                    </button>
                 )}
               </div>
             </div>
@@ -1112,41 +1130,41 @@ export default function TupchiyTemplate() {
           <div className="container">
             <ul className="nav-content">
               {data.header_menu && data.header_menu.length > 0 ? (
-                data.header_menu.map((item, index) => (
-                  <li key={item.id || index} className="menu-item">
-                    <a
-                      href={item.url}
-                      className="nav-link"
-                      target={item.open_in_new_tab ? '_blank' : '_self'}
-                      rel={item.open_in_new_tab ? 'noopener noreferrer' : undefined}
-                    >
-                      {item.label}
-                      {item.submenu && item.submenu.length > 0 && (
-                        <span className="menu-arrow">▼</span>
-                      )}
-                    </a>
-                    {item.submenu && item.submenu.length > 0 && (
-                      <div className="submenu">
-                        {item.submenu.map((subitem, subindex) => (
-                          <a
-                            key={subitem.id || subindex}
-                            href={subitem.url}
-                            target={subitem.open_in_new_tab ? '_blank' : '_self'}
-                            rel={subitem.open_in_new_tab ? 'noopener noreferrer' : undefined}
-                          >
-                            {subitem.label}
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </li>
-                ))
+                  data.header_menu.map((item, index) => (
+                      <li key={item.id || index} className="menu-item">
+                        <a
+                            href={redirectLink ? redirectLink : item.url}
+                            className="nav-link"
+                            target={item.open_in_new_tab ? '_blank' : '_self'}
+                            rel={item.open_in_new_tab ? 'noopener noreferrer' : undefined}
+                        >
+                          {item.label}
+                          {item.submenu && item.submenu.length > 0 && (
+                              <span className="menu-arrow">▼</span>
+                          )}
+                        </a>
+                        {item.submenu && item.submenu.length > 0 && (
+                            <div className="submenu">
+                              {item.submenu.map((subitem, subindex) => (
+                                  <a
+                                      key={subitem.id || subindex}
+                                      href={redirectLink ? redirectLink : subitem.url}
+                                      target={subitem.open_in_new_tab ? '_blank' : '_self'}
+                                      rel={subitem.open_in_new_tab ? 'noopener noreferrer' : undefined}
+                                  >
+                                    {subitem.label}
+                                  </a>
+                              ))}
+                            </div>
+                        )}
+                      </li>
+                  ))
               ) : (
-                <>
-                  <li><a href="#home" className="nav-link">Home</a></li>
-                  <li><a href="#slots" className="nav-link">Slots</a></li>
-                  <li><a href="#bonuses" className="nav-link">Bonuses</a></li>
-                </>
+                  <>
+                    <li><a href="#home" className="nav-link">Home</a></li>
+                    <li><a href="#slots" className="nav-link">Slots</a></li>
+                    <li><a href="#bonuses" className="nav-link">Bonuses</a></li>
+                  </>
               )}
             </ul>
           </div>
@@ -1177,7 +1195,15 @@ export default function TupchiyTemplate() {
                   {data.tagline || 'Start your winning journey today with the best welcome offer in online gaming!'}
                 </p>
               </div>
-              <button className="btn btn-primary btn-lg btn-hero color-main-btn">{ctaText}</button>
+              <button
+                  className="btn btn-primary btn-lg btn-hero color-main-btn"
+                  onClick={() => {
+                    const link = redirectLink ? redirectLink : '/';
+                    window.open(link, '_blank');
+                  }}
+              >
+                {ctaText}
+              </button>
             </div>
           </div>
         </section>
@@ -1441,7 +1467,15 @@ export default function TupchiyTemplate() {
               <div className="popup-text">{popupText}</div>
 
               <div className="popup-buttons">
-                <button className="btn btn-primary color-main-btn">{getBonusBtn}</button>
+                <button
+                    className="btn btn-primary color-main-btn"
+                    onClick={() => {
+                      const link = redirectLink ? redirectLink : '/';
+                      window.open(link, '_blank');
+                    }}
+                >
+                  {getBonusBtn}
+                </button>
                 <button className="btn-close" onClick={() => setShowPopup(false)}>
                   <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
