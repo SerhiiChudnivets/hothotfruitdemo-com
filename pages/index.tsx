@@ -1209,63 +1209,66 @@ export default function TupchiyTemplate() {
         </section>
 
         {/* Slots Section */}
-        <section id="slots" className="slots-section">
-          <div className="container">
-            {slotsTitle && (
-            <h2 className="section-title">
-              {slotsTitle}
-            </h2>
-            )}
-            <div className="slider-container">
-              <button
-                onClick={handleSlotPrev}
-                disabled={slotStartIndex === 0}
-                className="slider-btn slider-btn-left"
-              >
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
+        {slots.length > 0 && (
+            <section id="slots" className="slots-section">
+              <div className="container">
+                {slotsTitle && (
+                    <h2 className="section-title">
+                      {slotsTitle}
+                    </h2>
+                )}
+                <div className="slider-container">
+                  <button
+                      onClick={handleSlotPrev}
+                      disabled={slotStartIndex === 0}
+                      className="slider-btn slider-btn-left"
+                  >
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
 
-              <div className="slots-grid">
-                {slots.slice(slotStartIndex, slotStartIndex + visibleSlots).map((slot, index) => {
-                  const logoUrl = getLogoUrl(slot)
-                  return (
-                    <div key={slot.id || index} className="slot-card">
-                      {logoUrl ? (
-                        <img src={logoUrl} alt={slot.Name || `Slot ${index + 1}`} className="slot-image" />
-                      ) : (
-                        <div className="slot-image" style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>
-                          🎰
-                        </div>
-                      )}
-                      <div className="slot-overlay">
-                        <div className="slot-background">
-                          <span className="slot-name">{slot.Name || `Slot ${index + 1}`}</span>
-                          <button className="btn btn-primary" onClick={() => slot.link && window.open(slot.link, '_blank')}>
-                            Play
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
+                  <div className="slots-grid">
+                    {slots.slice(slotStartIndex, slotStartIndex + visibleSlots).map((slot, index) => {
+                      const logoUrl = getLogoUrl(slot)
+                      return (
+                          <div key={slot.id || index} className="slot-card">
+                            {logoUrl ? (
+                                <img src={logoUrl} alt={slot.Name || `Slot ${index + 1}`} className="slot-image" />
+                            ) : (
+                                <div className="slot-image" style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>
+                                  🎰
+                                </div>
+                            )}
+                            <div className="slot-overlay">
+                              <div className="slot-background">
+                                <span className="slot-name">{slot.Name || `Slot ${index + 1}`}</span>
+                                <button className="btn btn-primary" onClick={() => slot.link && window.open(slot.link, '_blank')}>
+                                  Play
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                      )
+                    })}
+                  </div>
+
+                  <button
+                      onClick={handleSlotNext}
+                      disabled={slotStartIndex >= slots.length - visibleSlots}
+                      className="slider-btn slider-btn-right"
+                  >
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-
-              <button
-                onClick={handleSlotNext}
-                disabled={slotStartIndex >= slots.length - visibleSlots}
-                className="slider-btn slider-btn-right"
-              >
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </section>
+            </section>
+        )}
 
         {/* Bonuses Section */}
+        {bonuses.length > 0 && (
         <section id="bonuses" className="bonuses-section">
           <div className="container">
             {bonusTitle && (
@@ -1332,6 +1335,7 @@ export default function TupchiyTemplate() {
             </div>
           </div>
         </section>
+        )}
 
         {/* Custom Content Section */}
         {processedContent && (
