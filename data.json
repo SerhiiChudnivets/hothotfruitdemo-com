@@ -1,7 +1,7 @@
 {
   "name": "hothotfruitdemo.com",
   "site_name": "hothotfruitdemo",
-  "html_head": "<meta name=\"google-site-verification\" content=\"bsv1axBaFxIcpsXD7Ulm6cBMy8NZ6NxpC2KV0AFtAik\" />\n<link rel=\"canonical\" href=\"http://hothotfruitdemo.com/\">",
+  "html_head": "<link rel=\"canonical\" href=\"http://hothotfruitdemo.com/\">\n<meta name=\"google-site-verification\" content=\"bsv1axBaFxIcpsXD7Ulm6cBMy8NZ6NxpC2KV0AFtAik\" />",
   "url": "hothotfruitdemo.com",
   "template": "tupchiy",
   "language_code": "en-ZA",
@@ -464,8 +464,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-03-19T11:16:06.403Z",
+  "_generated_at": "2026-03-19T11:19:45.337Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-03-19T11:16:06.938Z",
-  "_deploy_trigger": "s9r5jg"
+  "_last_deploy": "2026-03-19T11:19:45.844Z",
+  "_deploy_trigger": "jeg66"
 }
