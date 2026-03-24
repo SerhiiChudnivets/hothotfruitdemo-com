@@ -1025,29 +1025,6 @@ export default function TupchiyTemplate() {
 
     const backgroundImage = getMediaUrl(data.main_background_img);
 
-  // Parse html_head and inject into document head (client-side only)
-  useEffect(() => {
-    if (data.html_head && typeof document !== 'undefined') {
-      // Create a temporary div to parse HTML
-      const temp = document.createElement('div');
-      temp.innerHTML = data.html_head;
-
-      // Move all elements to document.head
-      Array.from(temp.children).forEach((child) => {
-        const clone = child.cloneNode(true) as HTMLElement;
-        // Add identifier to track our injected elements
-        clone.setAttribute('data-injected-from-strapi', 'true');
-        document.head.appendChild(clone);
-      });
-
-      // Cleanup on unmount
-      return () => {
-        document.querySelectorAll('[data-injected-from-strapi="true"]').forEach((el) => {
-          el.remove();
-        });
-      };
-    }
-  }, [data.html_head]);
 
   useEffect(() => {
     if (data.faq_schema && typeof document !== 'undefined') {
@@ -1073,7 +1050,13 @@ export default function TupchiyTemplate() {
     }
   }, [faqs, data.faq_schema]);
 
-
+  const googleVerification = data.html_head?.match(/content="([^"]+)"/)?.[1];
+  const canonical = data.html_head?.match(/href="([^"]+)"/)?.[1];
+  const hreflangs = Array.from(
+      data.html_head?.matchAll(
+          /<link[^>]*rel="alternate"[^>]*hreflang="([^"]+)"[^>]*href="([^"]+)"/g
+      ) || []
+  );
   return (
     <>
       <Head>
@@ -1081,6 +1064,27 @@ export default function TupchiyTemplate() {
         <meta name="robots" content={data.allow_indexing ? 'index,follow' : 'noindex,nofollow'} />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {googleVerification && (
+            <meta name="google-site-verification" content={googleVerification} />
+        )}
+
+        {hreflangs.map((match, i) => {
+          const lang = match[1];
+          const href = match[2];
+
+          return (
+              <link
+                  key={i}
+                  rel="alternate"
+                  hrefLang={lang}
+                  href={href}
+              />
+          );
+        })}
+
+        {canonical && (
+            <link rel="canonical" href={canonical} />
+        )}
       </Head>
 
       <style dangerouslySetInnerHTML={{ __html: dynamicStyles }} />
