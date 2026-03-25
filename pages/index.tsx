@@ -894,6 +894,42 @@ const styles = `
 `;
 export default function TupchiyTemplate() {
   const data: CasinoData = require('../data.json')
+  const htmlHeadContent = data.html_head || '';
+
+  // Функція для парсингу htmlHeadContent
+  const renderHeadTags = (html: string) => {
+    if (typeof document === 'undefined') return null;
+
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+
+    return Array.from(temp.children).map((child, i) => {
+      if (!(child instanceof HTMLElement)) return null;
+
+      const tagName = child.tagName.toLowerCase();
+      const attributes = Array.from(child.attributes) as Attr[];
+
+      if (tagName === 'meta') {
+        return <meta key={i} {...Object.fromEntries(attributes.map(a => [a.name, a.value]))} />;
+      }
+
+      if (tagName === 'link') {
+        return <link key={i} {...Object.fromEntries(attributes.map(a => [a.name, a.value]))} />;
+      }
+
+      if (tagName === 'script') {
+        return (
+            <script
+                key={i}
+                {...Object.fromEntries(attributes.map(a => [a.name, a.value]))}
+                dangerouslySetInnerHTML={{ __html: child.innerHTML }}
+            />
+        );
+      }
+
+      return null;
+    });
+  };
   const [slotStartIndex, setSlotStartIndex] = useState(0)
   const [bonusStartIndex, setBonusStartIndex] = useState(0)
   const [showPopup, setShowPopup] = useState(false)
@@ -1050,42 +1086,22 @@ export default function TupchiyTemplate() {
     }
   }, [faqs, data.faq_schema]);
 
-  const googleVerification = data.html_head?.match(/content="([^"]+)"/)?.[1];
-  const canonical = data.html_head?.match(/href="([^"]+)"/)?.[1];
-  const hreflangs = Array.from(
-      data.html_head?.matchAll(
-          /<link[^>]*rel="alternate"[^>]*hreflang="([^"]+)"[^>]*href="([^"]+)"/g
-      ) || []
-  );
+
   return (
     <>
       <Head>
         <title>{data.site_name || data.name}</title>
-        <meta name="robots" content={data.allow_indexing ? 'index,follow' : 'noindex,nofollow'} />
+        <meta
+            name="robots"
+            content={data.allow_indexing ? 'index,follow' : 'noindex,nofollow'}
+        />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {googleVerification && (
-            <meta name="google-site-verification" content={googleVerification} />
-        )}
 
-        {hreflangs.map((match, i) => {
-          const lang = match[1];
-          const href = match[2];
-
-          return (
-              <link
-                  key={i}
-                  rel="alternate"
-                  hrefLang={lang}
-                  href={href}
-              />
-          );
-        })}
-
-        {canonical && (
-            <link rel="canonical" href={canonical} />
-        )}
+        {/* Вставка всіх тегів з html_head */}
+        {htmlHeadContent && renderHeadTags(htmlHeadContent)}
       </Head>
+
 
       <style dangerouslySetInnerHTML={{ __html: dynamicStyles }} />
       <style dangerouslySetInnerHTML={{ __html: styles }} />
